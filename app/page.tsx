@@ -841,7 +841,7 @@ Please confirm availability and share pricing / booking details.`;
               </div>
               <div className="text-right">
                 <span className="text-xs font-bold text-amber-800 bg-amber-100/80 px-3 py-1 rounded-full">
-                  Rates shared on WhatsApp
+                  Rates on WhatsApp
                 </span>
               </div>
             </div>
@@ -863,15 +863,15 @@ Please confirm availability and share pricing / booking details.`;
 function HomePage({ navigate }: { navigate: (path: string) => void }) {
   return (
     <div className="space-y-20 pb-20">
-      {/* Full-width 16:9 Hero Background */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-stone-950">
+      {/* Responsive Hero Background optimized for Mobile & Desktop */}
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden bg-stone-950">
         <img
           src={ASSETS.hero}
           onError={(e) => { (e.currentTarget as HTMLImageElement).src = ASSETS.heroFallback; }}
           alt="The WildWood Villa Exterior"
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-95"
+          className="absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-95 scale-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 pt-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/90 text-amber-200 text-xs font-semibold backdrop-blur-md border border-amber-300/30">
