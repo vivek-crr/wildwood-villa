@@ -101,30 +101,70 @@ const GALLERY_DATA = [
   },
   {
     id: 5,
-    category: "rooms",
-    categoryLabel: "Rooms & Interiors",
-    title: "Bedrooms",
-    path: "/bedroom.jpg",
-    fallback: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+    category: "villa",
+    categoryLabel: "Villa & Grounds",
+    title: "Villa Grounds & Perimeter",
+    path: "/compound.jpg",
+    fallback: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 6,
     category: "rooms",
     categoryLabel: "Rooms & Interiors",
-    title: "Bathroom",
+    title: "Primary Bedroom Suite",
+    path: "/bedroom.jpg",
+    fallback: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 7,
+    category: "rooms",
+    categoryLabel: "Rooms & Interiors",
+    title: "Secondary Guest Bedroom",
+    path: "/bedroom 2.jpg",
+    fallback: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 8,
+    category: "rooms",
+    categoryLabel: "Rooms & Interiors",
+    title: "Panoramic Window View",
+    path: "/window view large.png",
+    fallback: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 9,
+    category: "rooms",
+    categoryLabel: "Rooms & Interiors",
+    title: "Attached Modern Bathroom",
     path: "/bathroom.jpg",
     fallback: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: 7,
+    id: 10,
     category: "dining",
     categoryLabel: "Dining",
-    title: "Dining",
+    title: "Dining Space",
+    path: "/dining.jpg",
+    fallback: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 11,
+    category: "dining",
+    categoryLabel: "Dining",
+    title: "Family Dining Area",
     path: "/dining2.jpg",
     fallback: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: 8,
+    id: 12,
+    category: "ambience",
+    categoryLabel: "Experiences",
+    title: "Riverside Stream Retreat",
+    path: "/surrounding.png",
+    fallback: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 13,
     category: "ambience",
     categoryLabel: "Experiences",
     title: "Campfire Evenings",
@@ -132,10 +172,10 @@ const GALLERY_DATA = [
     fallback: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: 9,
+    id: 14,
     category: "ambience",
     categoryLabel: "Experiences",
-    title: "Jeep Safari",
+    title: "Jeep Safari Adventure",
     path: "/jeep safari.png",
     fallback: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80"
   }
@@ -863,7 +903,7 @@ Please confirm availability and share pricing / booking details.`;
 function HomePage({ navigate }: { navigate: (path: string) => void }) {
   return (
     <div className="space-y-20 pb-20">
-      {/* Full View Portrait on Mobile (contained image so nothing is zoomed in) + Panoramic on Desktop */}
+      {/* Full View Portrait on Mobile + Panoramic on Desktop */}
       <section className="relative w-full min-h-[60vh] sm:min-h-[90vh] flex items-center justify-center bg-stone-950 overflow-hidden">
         <div className="absolute inset-0 w-full h-full flex items-center justify-center">
           <img
