@@ -501,7 +501,7 @@ function BookingForm({ initialStay = 'villa' }: { initialStay?: string }) {
     phone: '',
     stayType: initialStay,
     rooms: initialStay === 'villa' ? '5' : '1',
-    guests: initialStay === 'villa' ? '8' : '2',
+    guests: initialStay === 'villa' ? '15' : '2',
     checkIn: '',
     checkOut: '',
     notes: ''
@@ -528,7 +528,7 @@ function BookingForm({ initialStay = 'villa' }: { initialStay?: string }) {
         ...prev,
         stayType: initialStay,
         rooms: initialStay === 'villa' ? '5' : '1',
-        guests: initialStay === 'villa' ? '8' : '2'
+        guests: initialStay === 'villa' ? '15' : '2'
       }));
     }
   }, [initialStay]);
@@ -735,12 +735,12 @@ Please confirm availability and share pricing / booking details.`;
                       ...formData,
                       stayType: st,
                       rooms: st === 'villa' ? '5' : '1',
-                      guests: st === 'villa' ? '8' : '2'
+                      guests: st === 'villa' ? '15' : '2'
                     });
                   }}
                   className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-[#1E3A2F] focus:bg-white text-sm font-medium"
                 >
-                  <option value="villa">Entire Villa Buyout</option>
+                  <option value="villa">Entire Villa Buyout (Max 15–20 Guests)</option>
                   <option value="room">Individual Room(s)</option>
                 </select>
               </div>
@@ -777,14 +777,14 @@ Please confirm availability and share pricing / booking details.`;
                 <input
                   type="number"
                   min="1"
-                  max={formData.stayType === 'villa' ? "15" : (parseInt(formData.rooms) * 3).toString()}
+                  max={formData.stayType === 'villa' ? "20" : (parseInt(formData.rooms) * 3).toString()}
                   required
                   value={formData.guests}
                   onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-[#1E3A2F] focus:bg-white text-sm"
                 />
                 <p className="text-[11px] text-stone-500">
-                  {formData.stayType === 'room' ? `Max 3 guests/room (${parseInt(formData.rooms) * 3} max)` : 'Up to 10–12 guests base'}
+                  {formData.stayType === 'room' ? `Max 3 guests/room (${parseInt(formData.rooms) * 3} max)` : 'Max capacity 15–20 guests'}
                 </p>
               </div>
             </div>
@@ -863,17 +863,19 @@ Please confirm availability and share pricing / booking details.`;
 function HomePage({ navigate }: { navigate: (path: string) => void }) {
   return (
     <div className="space-y-20 pb-20">
-      {/* Responsive Hero Background optimized for Mobile & Desktop */}
-      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden bg-stone-950">
-        <img
-          src={ASSETS.hero}
-          onError={(e) => { (e.currentTarget as HTMLImageElement).src = ASSETS.heroFallback; }}
-          alt="The WildWood Villa Exterior"
-          className="absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-95 scale-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
+      {/* Full View Portrait on Mobile (contained image so nothing is zoomed in) + Panoramic on Desktop */}
+      <section className="relative w-full min-h-[60vh] sm:min-h-[90vh] flex items-center justify-center bg-stone-950 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+          <img
+            src={ASSETS.hero}
+            onError={(e) => { (e.currentTarget as HTMLImageElement).src = ASSETS.heroFallback; }}
+            alt="The WildWood Villa Exterior"
+            className="w-full h-full object-contain sm:object-cover sm:object-center filter brightness-95"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/40" />
         
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 pt-16">
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 py-20 sm:pt-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/90 text-amber-200 text-xs font-semibold backdrop-blur-md border border-amber-300/30">
             <Trees className="w-4 h-4" />
             <span>Exclusive Nature Homestay</span>
@@ -910,13 +912,13 @@ function HomePage({ navigate }: { navigate: (path: string) => void }) {
               Immerse yourself in calm & untouched natural beauty.
             </h2>
             <p className="text-stone-600 leading-relaxed text-sm sm:text-base">
-              Set inside a one acre area in Anchunadu (Marayoor-Kanthalloor), Idukki, The WildWood Villa offers high-altitude freshness without city noises or crowded resort corridors. Enjoy authentic homemade regional meals, open skies, and peaceful seclusion.
+              Set inside a 3 acres estate in Anchunadu (Marayoor-Kanthalloor), Idukki, The WildWood Villa offers high-altitude freshness without city noises or crowded resort corridors. Enjoy authentic homemade regional meals, open skies, and peaceful seclusion.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="p-4 rounded-2xl bg-stone-100/80 border border-stone-200">
-                <p className="text-2xl font-serif font-bold text-[#1E3A2F]">100%</p>
-                <p className="text-xs text-stone-500 font-medium">Villa Seclusion</p>
+                <p className="text-2xl font-serif font-bold text-[#1E3A2F]">3 Acres</p>
+                <p className="text-xs text-stone-500 font-medium">Private Estate Grounds</p>
               </div>
               <div className="p-4 rounded-2xl bg-stone-100/80 border border-stone-200">
                 <p className="text-2xl font-serif font-bold text-[#1E3A2F]">360°</p>
@@ -978,7 +980,7 @@ function HomePage({ navigate }: { navigate: (path: string) => void }) {
                       Rates on WhatsApp
                     </span>
                   </div>
-                  <p className="text-xs text-stone-500 mt-2">Spacious private sanctuary for full family gatherings and groups.</p>
+                  <p className="text-xs text-stone-500 mt-2">Private buyout for up to 15–20 guests across 5 bedrooms.</p>
                 </div>
               </div>
               <div className="p-6 pt-0">
@@ -1100,7 +1102,7 @@ function StaysPage({ navigate }: { navigate: (path: string) => void }) {
         <span className="text-xs uppercase tracking-widest text-[#1E3A2F] font-bold">Accommodations</span>
         <h1 className="font-serif text-4xl font-bold text-[#1E3A2F]">Choose Your Stay</h1>
         <p className="text-stone-600 text-sm sm:text-base">
-          Choose between full private villa buyout for large families or cozy individual rooms.
+          Choose between full private villa buyout for large families and groups (up to 15–20 guests) or cozy individual rooms.
         </p>
       </div>
 
@@ -1156,7 +1158,7 @@ function StaysPage({ navigate }: { navigate: (path: string) => void }) {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3 bg-stone-50 rounded-xl border border-stone-200/80 flex items-center gap-2.5 text-xs font-semibold text-stone-800">
                   <Users className="w-4 h-4 text-[#1E3A2F]" />
-                  <span>Up to 10–12 Guests</span>
+                  <span>Max 15–20 Guests</span>
                 </div>
                 <div className="p-3 bg-stone-50 rounded-xl border border-stone-200/80 flex items-center gap-2.5 text-xs font-semibold text-stone-800">
                   <BedDouble className="w-4 h-4 text-[#1E3A2F]" />
@@ -1172,7 +1174,7 @@ function StaysPage({ navigate }: { navigate: (path: string) => void }) {
                 <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500">Included Amenities</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-700">
                   <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-700" /> Hot Water Geyser</div>
-                  <div className="flex items-center gap-2"><Trees className="w-4 h-4 text-emerald-700" /> Exclusive private lawn & outdoor space</div>
+                  <div className="flex items-center gap-2"><Trees className="w-4 h-4 text-emerald-700" /> Exclusive private lawn & 3 acres estate space</div>
                   <div className="flex items-center gap-2"><Utensils className="w-4 h-4 text-emerald-700" /> Cook on demand (Breakfast & Dinner only)</div>
                   <div className="flex items-center gap-2"><Wifi className="w-4 h-4 text-emerald-700" /> High-Speed Optical Wi-Fi</div>
                   <div className="flex items-center gap-2"><Zap className="w-4 h-4 text-emerald-700" /> 24/7 Power backup</div>
@@ -1623,8 +1625,7 @@ function BookPage({ queryStay }: { queryStay?: string }) {
     { q: "How do I get the price/rates for my stay?", a: "Fill out the booking form on this page with your dates and guest count. You will receive real-time seasonal rates and availability directly via WhatsApp." },
     { q: "Is cook service available?", a: "Yes, cook-on-demand service is available for Breakfast and Dinner only. Grocery and raw food item costs are charged separately." },
     { q: "How do I finalize my booking?", a: "Submit the form to send a pre-formatted message on WhatsApp. Once dates and rates are confirmed, you can transfer a 50% advance token via UPI/Bank transfer." },
-    { q: "What is the cancellation policy?", a: "Advance deposits are 100% refundable if cancelled 7 days prior to check-in. Within 7 days, date rescheduling is offered subject to availability." },
-    { q: "Are pets allowed at the villa?", a: "Yes! We love pets. Since we have open estate gardens, pets can roam freely under your supervision." }
+    { q: "Are pets allowed at the villa?", a: "Yes, we love pets." }
   ];
 
   return (
@@ -1639,6 +1640,30 @@ function BookPage({ queryStay }: { queryStay?: string }) {
 
       <div className="max-w-4xl mx-auto">
         <BookingForm initialStay={queryStay || 'villa'} />
+      </div>
+
+      {/* Dedicated Cancellation Policy Section */}
+      <div className="max-w-3xl mx-auto bg-stone-50 border border-stone-200 rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 bg-emerald-100 text-[#1E3A2F] rounded-xl">
+            <ShieldAlert className="w-5 h-5 text-emerald-800" />
+          </div>
+          <h3 className="font-serif text-2xl font-bold text-[#1E3A2F]">Cancellation & Rescheduling Policy</h3>
+        </div>
+        <div className="space-y-3 text-xs sm:text-sm text-stone-700 leading-relaxed pt-1">
+          <div className="flex items-start gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-800 shrink-0 mt-2" />
+            <p>
+              <strong>Cancellations prior to 7 days before check-in:</strong> Only 50% of the advance deposit will be refunded.
+            </p>
+          </div>
+          <div className="flex items-start gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-amber-800 shrink-0 mt-2" />
+            <p>
+              <strong>Cancellations within the 7-day window:</strong> No refund is given. However, guests will be provided the option to reschedule dates subject to availability.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-3xl mx-auto space-y-6">
@@ -1750,8 +1775,9 @@ export default function App() {
                 <>
                   <p><strong>1. Booking Enquiries & Confirmation:</strong> All reservations requested through this website operate as booking inquiries. Final confirmation and rates are provided directly by our host desk upon verification of date availability and receipt of advance token deposit.</p>
                   <p><strong>2. Check-in & Check-out:</strong> Standard check-in is 2:00 PM and check-out is 11:00 AM. Early check-in or late check-out is subject to prior availability.</p>
-                  <p><strong>3. Estate Access & Road:</strong> The final 1.7 km approach road is an unpaved rustic forest road. Please review vehicle clearances prior to arrival. Jeep transfers from junction are available on request.</p>
-                  <p><strong>4. Add-on Services:</strong> Food, cook-on-demand services, campfire, and jeep safaris are separate paid services not included in base room or villa reservations.</p>
+                  <p><strong>3. Cancellation Policy:</strong> Only 50% of the advance deposit is refunded if cancelled 7 days prior to check-in. If cancelled within the 7-day window, no refund is given, with the option to reschedule dates based on availability.</p>
+                  <p><strong>4. Estate Access & Road:</strong> The final 1.7 km approach road is an unpaved rustic forest road. Please review vehicle clearances prior to arrival. Jeep transfers from junction are available on request.</p>
+                  <p><strong>5. Add-on Services:</strong> Food, cook-on-demand services, campfire, and jeep safaris are separate paid services not included in base room or villa reservations.</p>
                 </>
               ) : (
                 <>
