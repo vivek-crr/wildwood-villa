@@ -34,8 +34,8 @@ import {
   AlertCircle
 } from 'lucide-react';
 
-const PLACEHOLDER_PHONE = "917306818377";
-const PLACEHOLDER_EMAIL = "stay@thewildwoodvilla.com";
+const PLACEHOLDER_PHONE = "919496066507";
+const PLACEHOLDER_EMAIL = "thewildwoodvilla@gmail.com";
 const PLACEHOLDER_LOCATION = "Anchunadu (Marayoor), Idukki, Kerala";
 const GOOGLE_MAPS_PIN_URL = "https://www.google.com/maps/place/AYOTHYA+STORE/@10.2688039,77.1537213,743m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b0783fdd7b03339:0x72ff34d4ed729f54!8m2!3d10.2687986!4d77.1562962!16s%2Fg%2F11t1btfjlt!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D";
 const PLACEHOLDER_MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.3575971439486!2d77.1537213!3d10.2688039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0783fdd7b03339%3A0x72ff34d4ed729f54!2sAYOTHYA%20STORE!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
@@ -988,7 +988,7 @@ function HomePage({ navigate }: { navigate: (path: string) => void }) {
       {/* Stay Cards */}
       <section className="bg-stone-100/80 py-16 border-y border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div className="flex flex-col sm:row justify-between items-start sm:items-end gap-4">
             <div>
               <span className="text-xs uppercase tracking-widest text-[#1E3A2F] font-bold">Accommodations</span>
               <h2 className="font-serif text-3xl font-bold text-[#1E3A2F]">Featured Stay Options</h2>
