@@ -37,7 +37,7 @@ import {
 
 const WEB3FORMS_ACCESS_KEY = "70c8a7e2-4831-492a-896b-18eaa9eff47d";
 
-const PLACEHOLDER_PHONE = "917306818377";
+const PLACEHOLDER_PHONE = "919496066507";
 const PLACEHOLDER_EMAIL = "thewildwoodvilla@gmail.com";
 const PLACEHOLDER_LOCATION = "Anchunadu (Marayoor), Idukki, Kerala";
 const GOOGLE_MAPS_PIN_URL = "https://www.google.com/maps/place/AYOTHYA+STORE/@10.2688039,77.1537213,743m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b0783fdd7b03339:0x72ff34d4ed729f54!8m2!3d10.2687986!4d77.1562962!16s%2Fg%2F11t1btfjlt!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D";
