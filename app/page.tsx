@@ -31,10 +31,13 @@ import {
   ConciergeBell,
   Bath,
   Image as ImageIcon,
-  AlertCircle
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 
-const PLACEHOLDER_PHONE = "919496066507";
+const WEB3FORMS_ACCESS_KEY = "70c8a7e2-4831-492a-896b-18eaa9eff47d";
+
+const PLACEHOLDER_PHONE = "917306818377";
 const PLACEHOLDER_EMAIL = "thewildwoodvilla@gmail.com";
 const PLACEHOLDER_LOCATION = "Anchunadu (Marayoor), Idukki, Kerala";
 const GOOGLE_MAPS_PIN_URL = "https://www.google.com/maps/place/AYOTHYA+STORE/@10.2688039,77.1537213,743m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b0783fdd7b03339:0x72ff34d4ed729f54!8m2!3d10.2687986!4d77.1562962!16s%2Fg%2F11t1btfjlt!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D";
@@ -548,6 +551,7 @@ function BookingForm({ initialStay = 'villa' }: { initialStay?: string }) {
   });
 
   const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedEnquiry, setSubmittedEnquiry] = useState<{
     waUrl: string;
     details: {
@@ -589,7 +593,7 @@ function BookingForm({ initialStay = 'villa' }: { initialStay?: string }) {
     return nights > 0 ? nights : 1;
   }, [formData.checkIn, formData.checkOut]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: string[] = [];
 
@@ -625,11 +629,13 @@ function BookingForm({ initialStay = 'villa' }: { initialStay?: string }) {
     }
 
     setFormErrors([]);
+    setIsSubmitting(true);
 
     const stayLabel = formData.stayType === 'villa' 
       ? 'Entire Villa Buyout (Private Buyout)' 
       : 'Individual Room(s)';
 
+    // Format WhatsApp message
     const formattedMessage = `*🌲 New Resort Booking Enquiry*
 ──────────────────────────
 👤 *Guest Name:* ${formData.name}
@@ -650,6 +656,37 @@ Please confirm availability and share pricing / booking details.`;
 
     const encodedMessage = encodeURIComponent(formattedMessage);
     const waUrl = `https://wa.me/${PLACEHOLDER_PHONE}?text=${encodedMessage}`;
+
+    // Dual-Routing: Send instant booking backup directly to thewildwoodvilla@gmail.com
+    if (WEB3FORMS_ACCESS_KEY) {
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: `🚨 [Owner Alert] New Booking Enquiry from ${formData.name} (${nightsCount} Nights)`,
+            from_name: "The WildWood Villa Reservation Desk",
+            guest_name: formData.name,
+            guest_mobile: formData.phone,
+            stay_option: stayLabel,
+            number_of_rooms: formData.rooms,
+            total_guests: formData.guests,
+            check_in_date: formData.checkIn,
+            check_out_date: formData.checkOut,
+            duration_nights: nightsCount,
+            special_requests: formData.notes || "None"
+          })
+        });
+      } catch (err) {
+        console.error("Backup email notification failed:", err);
+      }
+    }
+
+    setIsSubmitting(false);
 
     setSubmittedEnquiry({
       waUrl,
@@ -888,10 +925,20 @@ Please confirm availability and share pricing / booking details.`;
 
             <button
               type="submit"
-              className="w-full py-4 rounded-2xl font-bold bg-[#1E3A2F] hover:bg-emerald-950 text-white transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3 text-sm sm:text-base"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-2xl font-bold bg-[#1E3A2F] hover:bg-emerald-950 disabled:opacity-70 text-white transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3 text-sm sm:text-base cursor-pointer"
             >
-              <Send className="w-5 h-5 text-emerald-400" />
-              <span>Get Rates & Check Availability via WhatsApp</span>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 text-emerald-400 animate-spin" />
+                  <span>Connecting with Host...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5 text-emerald-400" />
+                  <span>Get Rates & Check Availability via WhatsApp</span>
+                </>
+              )}
             </button>
           </form>
         </>
